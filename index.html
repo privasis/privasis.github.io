@@ -467,7 +467,7 @@
             Privasis contains a total of 1,414,871 records and 55,092,084 annotated attributes, averaging 39 attributes per record.
           </p>
         <div class="content is-centered has-text-justified">
-          <img src="./static/images/statistics.png" alt="" style="width:80%;height:100%" class="center">
+          <img src="./static/images/statistics.png" alt="" style="width:85%;height:100%" class="center">
         </div>
 
           <p>
@@ -501,7 +501,7 @@
           <b>Diversity:</b> We compare Privasis to human-written datasets using four diversity metrics (MATTR, bigram diversity, Shannon entropy, and cosine similarity). Across all domains, Privasis consistently shows greater diversity: higher MATTR and bigram diversity indicate richer vocabulary and syntactic variation, higher Shannon entropy reflects less repetition, and lower cosine similarity confirms reduced redundancy and greater semantic diversity.
         </p>
         <div class="content is-centered has-text-justified">
-          <img src="./static/images/diversity.png" alt="" style="width:80%;height:100%;margin:1em auto;" class="center">
+          <img src="./static/images/diversity.png" alt="" style="width:82%;height:100%;margin:1em auto;" class="center">
           <figcaption style="font-size: large; text-align: center; margin-bottom: 1em;">Table 2: Diversity comparison between Privasis and human-written datasets.</figcaption>
         </div>
         <p>
@@ -551,7 +551,7 @@ Our goal in the sanitization setting is therefore more ambitious than classic an
 
           <h3 class="title is-4" id="decomposition-pipeline">A Decomposition-based Pipeline for building a parallel corpus for text sanitization</h3>
           <div class="content is-centered has-text-justified">
-            <img src="./static/images/sanitization.png" alt="" style="width:95%;height:100%;margin:1em auto;" class="center">
+            <img src="./static/images/sanitization.png" alt="" style="width:99%;height:100%;margin:1em auto;" class="center">
             <figcaption style="font-size: large; text-align: left; margin-bottom: 1em;">Figure 3: Our decomposition-based pipeline for building the parallel corpus for text sanitization. This illustrates a single target sanitization process. Our pipeline operates on multiple targets simultaneously.</figcaption>
           </div>
 
@@ -580,12 +580,12 @@ We merge sanitized and untouched chunks back together, preserving the original s
 
 ##### 5. Instruction Synthesis and Retention
 All target-level instructions are combined into a single, natural user-like instruction, with explicit retention constraints (`sanitization_action`: KEEP) to avoid over-sanitization.
-The key idea is **global grounding per target with local, parallel execution per chunk**, allowing us to scale to long documents without missing or inconsistent edits. The result is a high-quality triplet—`(original_text, sanitization_instruction, sanitized_text)`—used to build the **Privasis-Sanitization** dataset of 100K records.
+The key idea is **global grounding per target with local, parallel execution per chunk**, allowing us to scale to long documents without missing or inconsistent edits. The result is a high-quality triplet—`(original_record, sanitization_instruction, sanitized_record)`—used to build the **Privasis-Sanitization** dataset of 100K records.
           </div>
 
           <h3 class="title is-5">How does Privasis-Sanitization compare to existing sanitization datasets?</h3>
           <div class="content is-centered has-text-justified">
-            <img src="./static/images/dataset_comparison.png" alt="" style="width:95%;height:100%;margin:1em auto;" class="center">
+            <img src="./static/images/dataset_comparison.png" alt="" style="width:100%;height:100%;margin:1em auto;" class="center">
             <figcaption style="font-size: large; text-align: center; margin-bottom: 1em;">Table 4: Comparison of Privasis-Sanitization to existing sanitization datasets.</figcaption>
           </div>
         </br>
