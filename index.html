@@ -1335,6 +1335,57 @@ Privasis is a starting point. As AI agents gain deeper access to our personal da
   });
 </script>
 
+<!-- Lightbox Modal -->
+<div id="lightbox-modal" class="lightbox-modal">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-image" src="" alt="Expanded image">
+</div>
+
+<script>
+  // Lightbox JavaScript
+  document.addEventListener('DOMContentLoaded', function() {
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    
+    // Get all images in sections and hero that should be clickable
+    const images = document.querySelectorAll('.section img:not(.no-lightbox), .hero img:not(.no-lightbox)');
+    
+    images.forEach(img => {
+      img.addEventListener('click', function(e) {
+        e.preventDefault();
+        lightboxImage.src = this.src;
+        lightboxImage.alt = this.alt || 'Expanded image';
+        lightboxModal.classList.add('is-active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      });
+    });
+    
+    // Close lightbox when clicking the X button
+    lightboxClose.addEventListener('click', function() {
+      closeLightbox();
+    });
+    
+    // Close lightbox when clicking outside the image
+    lightboxModal.addEventListener('click', function(e) {
+      if (e.target === lightboxModal) {
+        closeLightbox();
+      }
+    });
+    
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && lightboxModal.classList.contains('is-active')) {
+        closeLightbox();
+      }
+    });
+    
+    function closeLightbox() {
+      lightboxModal.classList.remove('is-active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+  });
+</script>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
