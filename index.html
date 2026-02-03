@@ -61,6 +61,71 @@
       margin-left: 0;
       color: #666;
     }
+    /* Sidebar navigation styling */
+    .sidebar-nav {
+      position: fixed;
+      left: max(20px, calc((100vw - 960px) / 2 - 360px));
+      top: 120px;
+      width: 280px;
+      max-height: calc(100vh - 160px);
+      overflow-y: auto;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 2px;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .sidebar-nav.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .sidebar-nav .nav-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #363636;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #000;
+    }
+    .sidebar-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-nav li {
+      margin-bottom: 0.25rem;
+    }
+    .sidebar-nav a {
+      display: block;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.8rem;
+      color: #4a4a4a;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      line-height: 1.1;
+    }
+    .sidebar-nav a:hover {
+      background: #f5f5f5;
+      color: #1899c5;
+    }
+    .sidebar-nav .nav-subtitle {
+      padding-left: 1rem;
+      font-size: 0.75rem;
+    }
+    .sidebar-nav .nav-subtitle a {
+      color: #7a7a7a;
+    }
+    .sidebar-nav .nav-subtitle a:hover {
+      color: #1899c5;
+    }
+    @media screen and (max-width: 1570px) {
+      .sidebar-nav {
+        display: none;
+      }
+    }
     /* Markdown table styling */
     .markdown table {
       border-collapse: collapse;
@@ -147,6 +212,9 @@
           More Research
         </a>
         <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://mireshghallah.github.io/blog/contextual_integrity.html">
+            Contextual Privacy Blog Post
+          </a>
           <a class="navbar-item" href="https://confaide.github.io">
             ConfAIde
           </a>
@@ -301,7 +369,24 @@
 </section>
 
 
-<section class="section">
+<!-- Sidebar Navigation -->
+<nav class="sidebar-nav">
+  <div class="nav-title">Overview</div>
+  <ul>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#synthesis">Building Privasis</a></li>
+    <li class="nav-subtitle"><a href="#pipeline">Synthesis Pipeline</a></li>
+    <li class="nav-subtitle"><a href="#analysis">What's in Privasis?</a></li>
+    <li><a href="#sanitization">Building a Sanitization Parallel Corpus</a></li>
+    <li class="nav-subtitle"><a href="#why-existing-falls-short">What are We Missing?</a></li>
+    <li class="nav-subtitle"><a href="#decomposition-pipeline">Decomposition-based Pipeline</a></li>
+    <li class="nav-subtitle"><a href="#experiments">Experiments (Benchmarking)</a></li>
+    <li><a href="#whats-next">What's Next for Privacy and Agents?</a></li>
+    <li><a href="#BibTeX">BibTeX</a></li>
+  </ul>
+</nav>
+
+<section class="section" id="intro">
     <!-- Intro. -->
     <div class="columns is-centered">
       <div class="container is-max-desktop">
@@ -334,14 +419,14 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="synthesis">
   <div class="container is-max-desktop">
     <!-- Results. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Synthesizing a 1M-scale Privacy-forward Corpus from Scratch</h2>
 
-        <h3 class="title is-4">Pipeline of Privasis</h3>
+        <h3 class="title is-4" id="pipeline">Pipeline of Privasis</h3>
         <div class="content has-text-justified">
           <img src="./static/images/synthesis.jpg" alt="" style="width:100%;height:100%;margin:1em 0;" class="center">
           <figcaption style="font-size: large; text-align: center; margin-bottom: 1em;">Figure 2: Our synthesis pipeline and an example of the generated data.</figcaption> 
@@ -374,7 +459,7 @@
     <!-- Statistics. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h3 class="title is-4">Analysis on Privasis</h3>
+        <h3 class="title is-4" id="analysis">Analysis of Privasis</h3>
         <div class="content has-text-justified">
           <h3 class="title is-5">Statistics</h3>
           <p>
@@ -430,16 +515,18 @@
       </div>
     </div>
 <hr>
-    <div class="columns is-centered">
+    <div class="columns is-centered" id="sanitization">
       <div class="column is-full-width">
         <h3 class="title is-3">Text Sanitization as a Use Case of Privasis</h3>
         <div class="content has-text-justified">
           <div class="markdown">
+With Privasis, we now introduce **a new dataset and benchmark for text sanitization: Privasis-Sanitization.**
+
 In the real world, sensitive information rarely appears as clean, well-defined PII fields. Instead, it's scattered across long documents—medical notes, emails, financial records—entangled with context that users still want to keep.
 
 Our goal in the sanitization setting is therefore more ambitious than classic anonymization. We want models that can **selectively remove or abstract sensitive information**, *while preserving utility, coherence, and instruction-following flexibility*. To achieve this, we introduce Privasis-Sanitization, a large-scale parallel corpus built from Privasis and a decomposition-based pipeline designed specifically for this challenge.
           </div>
-          <h3 class="title is-4">Why Existing Sanitization Falls Short</h3>
+          <h3 class="title is-4" id="why-existing-falls-short">Why Existing Sanitization Falls Short</h3>
           <div class="markdown">
 
   Most prior sanitization datasets and systems focus on one or more narrow constraints:
@@ -461,10 +548,10 @@ Our goal in the sanitization setting is therefore more ambitious than classic an
   Even frontier LLMs struggle with these requirements—especially on long documents—often missing at least one sensitive attribute or over-editing non-sensitive content. In privacy-sensitive settings, one miss is enough to fail.
           </div>
 
-          <h3 class="title is-4">A Decomposition-based Pipeline for building a parallel corpus for text sanitization</h3>
+          <h3 class="title is-4" id="decomposition-pipeline">A Decomposition-based Pipeline for building a parallel corpus for text sanitization</h3>
           <div class="content is-centered has-text-justified">
             <img src="./static/images/sanitization.png" alt="" style="width:95%;height:100%;margin:1em auto;" class="center">
-            <figcaption style="font-size: large; text-align: center; margin-bottom: 1em;">Figure 3: Our decomposition-based pipeline for building the parallel corpus for text sanitization. This illustrates a single target sanitization process. Our pipeline operates on multiple targets simultaneously.</figcaption>
+            <figcaption style="font-size: large; text-align: left; margin-bottom: 1em;">Figure 3: Our decomposition-based pipeline for building the parallel corpus for text sanitization. This illustrates a single target sanitization process. Our pipeline operates on multiple targets simultaneously.</figcaption>
           </div>
 
           <p>
@@ -502,7 +589,7 @@ The key idea is **global grounding per target with local, parallel execution per
           </div>
         </br>
 
-          <h3 class="title is-4">Experiments</h3>
+          <h3 class="title is-4" id="experiments">Experiments</h3>
           <div class="markdown">
 ##### Training
 We train a sanitizer Privasis-Cleaner that, given a `text` and a `sanitization_instruction`, outputs a sanitized version `sanitized_text` where target attributes are abstracted or removed. Since it is safer when sanitization models are run locally, we target lightweight Qwen3 models: 0.6B, 1.7B, and 4B. We train them on a 37K subset of Privasis-Sanitization.
@@ -547,7 +634,7 @@ What's especially important is that many models "mostly" succeed—sanitizing a 
           </div>
           <div class="content is-centered has-text-justified">
             <img src="./static/images/results.png" alt="" style="width:100%;height:100%;margin:1em auto;" class="center">
-            <figcaption style="font-size: large; text-align: center; margin-bottom: 1em;">Table 5: Performance of Privasis-Sanitization on text sanitization tasks.</figcaption>
+            <figcaption style="font-size: large; text-align: center; margin-bottom: 1em;">Table 5: Performance comparison on the Privasis-Sanitization benchmark.</figcaption>
           </div>
         </div>
         <br/>
@@ -583,7 +670,7 @@ What's especially important is that many models "mostly" succeed—sanitizing a 
           <!--/ Challenging domains. -->
         </div>
 <hr>
-    <div class="columns is-centered">
+    <div class="columns is-centered" id="whats-next">
       <div class="column is-full-width">
         <h3 class="title is-3">What's Next in Privacy and Agents operating on Social Records?</h3>
         <div class="content has-text-justified">
@@ -940,6 +1027,42 @@ Privasis is a starting point. As AI agents gain deeper access to our personal da
 </style>
 
 <script>
+  // Sidebar Navigation JavaScript - Smooth scroll and visibility
+  document.addEventListener('DOMContentLoaded', function() {
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+    const sidebar = document.querySelector('.sidebar-nav');
+    const introSection = document.getElementById('intro');
+    
+    // Smooth scroll
+    sidebarLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          const offset = 80;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+    
+    // Show/hide sidebar based on scroll position
+    function updateSidebarVisibility() {
+      if (introSection) {
+        const introTop = introSection.getBoundingClientRect().top;
+        if (introTop <= 150) {
+          sidebar.classList.add('is-visible');
+        } else {
+          sidebar.classList.remove('is-visible');
+        }
+      }
+    }
+    
+    window.addEventListener('scroll', updateSidebarVisibility);
+    updateSidebarVisibility();
+  });
+
   // Data Explorer JavaScript
   document.addEventListener('DOMContentLoaded', function() {
     let examplesData = [];
