@@ -341,7 +341,7 @@
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code coming soon!</span>
+                  <span>Code</span>
                   </a>
               </span>
               <!-- Dataset Link. -->
@@ -413,12 +413,12 @@
           </p>
 
           <p>
-            Privacy-preserving behavior requires capabilities that current models fundamentally lack—data disentanglement, abstraction, and inhibition. Consider abstraction: models must learn when "March 3, 2024" should become "early March," or when "Jane takes 20mg of Lexapro daily for anxiety" should reduce to "Jane has a health condition requiring regular medication." But <b>there is virtually no training data for these transformations</b>. Models have never seen examples of reducing specificity while preserving utility. Without training signal on these transformations, models fail at them—they either delete too much, destroying utility, or preserve too much, leaking sensitive details. Fixing reasoning for math and coding won't fix this. Verifiable tasks with ground-truth answers are fundamentally different from the pluralistic, context-dependent decisions that privacy requires.
+            Privacy-preserving behavior requires capabilities that current models fundamentally lack—data disentanglement, abstraction, and inhibition. Consider abstraction: models must learn when "March 3, 2024" should become "early March," or when "Jane takes 20mg of Lexapro daily for anxiety" should reduce to "Jane has a health condition requiring regular medication." However, <b>there is virtually no training data for these transformations, nor are there models that can perform them reliably in local environments</b>. Without training signal on these transformations, models fail at them—they either delete too much, destroying utility, or preserve too much, leaking sensitive details. Fixing reasoning for math and coding won't fix this. Verifiable tasks with ground-truth answers are fundamentally different from the pluralistic, context-dependent decisions that privacy requires.
           </p>
 
           <h3 class="title is-5">Privasis Design</h3>
           <p>
-            That's the gap we aim to close. We introduce a generative process that synthesizes realistic user profiles—complete with personal attributes like names, contact details, medical history, and financial records—using only demographic seeds and no real private data. This process enables the creation of <b>Privasis</b> (short for <i>privacy oasis</i>), a million-scale synthetic dataset with over 55 million annotated attributes. As one demonstration of downstream use, we also release <b>Privasis-Sanitization</b>, a 100K-record parallel corpus that pairs original texts with natural sanitization instructions and their corresponding sanitized outputs—designed specifically for training and evaluating text sanitization models.
+            That's the gap we aim to close. We introduce a generative process that synthesizes realistic user profiles—complete with personal attributes like names, contact details, medical history, and financial records—using only demographic seeds and no real private data. This process enables the creation of <b>Privasis</b> (short for <i>privacy oasis</i>), a million-scale synthetic dataset with over 55 million annotated attributes. As one demonstration of downstream use, we also release <b>Privasis-Sanitization</b>, a 100K-record parallel corpus that pairs original texts with natural sanitization instructions and their corresponding sanitized outputs—designed specifically for training and evaluating data sanitization models.
           </p>
 
           <p>
@@ -431,7 +431,7 @@
 
           <h3 class="title is-5">Building Privacy-forward Systems</h3>
           <p>
-            By training on Privasis-Sanitization, <b>we show that even compact models can learn these nuanced privacy transformations at scale</b>. A fine-tuned 4B parameter model outperforms frontier systems like o3 and GPT-5 on our sanitization benchmarks—enabling users to deploy lightweight privacy guards locally that intercept and sanitize sensitive information before it reaches any AI agent, whether remote or on-device. Privasis enables a different approach where local sanitization models strip away unnecessary detail while preserving task utility. Beyond immediate protection, Privasis provides the foundation for building privacy-forward agents from the ground up—systems that understand contextual boundaries, respect information flow, and make appropriate disclosure decisions by design rather than as an afterthought. High-performance privacy protection can—and should—be handled within local, secure environments where users retain full control.
+            <b>We show that we can empower compact models to learn these nuanced privacy transformations at scale</b>, by training on Privasis-Sanitization. Our fine-tuned 4B parameter Privasis-Cleaner model outperforms frontier systems like o3 and GPT-5 on our sanitization benchmarks—enabling users to deploy lightweight privacy guards locally that intercept and sanitize sensitive information before it reaches any AI agent, whether remote or on-device. Privasis enables a different approach where local sanitization models strip away unnecessary detail while preserving task utility. Beyond immediate protection, Privasis provides the foundation for building privacy-forward agents from the ground up—systems that understand contextual boundaries, respect information flow, and make appropriate disclosure decisions by design rather than as an afterthought. High-performance privacy protection can—and should—be handled within local, secure environments where users retain full control.
           </p>
         </div>
       </div>
