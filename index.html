@@ -307,7 +307,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="./static/data/privasis.pdf"
+                <a href="https://arxiv.org/pdf/2602.03183"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -316,12 +316,12 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/abs/2602.03183"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv coming soon!</span>
+                  <span>arXiv</span>
                 </a>
               </span>
               <!-- Video Link.
@@ -398,8 +398,9 @@
             <!-- We synthesize a million-scale corpus of private records. Then, we show how to leverage Privasis to build a parallel corpus for text sanitization. -->
         </div>
         <div class="content has-text-justified">
+          <br>
+          <h3 class="title is-5">Motivation</h3>
           <p>
-            <br>
             For years, privacy-focused AI research has faced a fundamental limitation: <b>there's no large-scale public data to work with</b>. And for good reason. Truly private data—medical history, financial records, personal messages—cannot be shared without violating legal and ethical boundaries. As a result, privacy research has been constrained to small, narrow datasets, in stark contrast to the scale that has driven progress across the rest of AI.
           </p>
 
@@ -412,7 +413,25 @@
           </p>
 
           <p>
+            Privacy-preserving behavior requires capabilities that current models fundamentally lack—data disentanglement, abstraction, and inhibition. Consider abstraction: models must learn when "March 3, 2024" should become "early March," or when "Jane takes 20mg of Lexapro daily for anxiety" should reduce to "Jane has a health condition requiring regular medication." But <b>there is virtually no training data for these transformations</b>. Models have never seen examples of reducing specificity while preserving utility. Without training signal on these transformations, models fail at them—they either delete too much, destroying utility, or preserve too much, leaking sensitive details. Fixing reasoning for math and coding won't fix this. Verifiable tasks with ground-truth answers are fundamentally different from the pluralistic, context-dependent decisions that privacy requires.
+          </p>
+
+          <h3 class="title is-5">Privasis Design</h3>
+          <p>
             That's the gap we aim to close. We introduce a generative process that synthesizes realistic user profiles—complete with personal attributes like names, contact details, medical history, and financial records—using only demographic seeds and no real private data. This process enables the creation of <b>Privasis</b> (short for <i>privacy oasis</i>), a million-scale synthetic dataset with over 55 million annotated attributes. As one demonstration of downstream use, we also release <b>Privasis-Sanitization</b>, a 100K-record parallel corpus that pairs original texts with natural sanitization instructions and their corresponding sanitized outputs—designed specifically for training and evaluating text sanitization models.
+          </p>
+
+          <p>
+            The Privasis-Sanitization dataset and benchmarks are designed around a core insight: real privacy isn't about hiding everything or revealing everything—it's about <i>appropriate information flow</i>. The theory of contextual integrity tells us that privacy violations occur when information crosses contextual boundaries in ways that breach social expectations. A user's salary is appropriate to share with HR but inappropriate to share with a coworker unprompted. Medical details needed for booking a therapy appointment shouldn't leak into a request for time off. 
+          </p>
+
+          <p>
+            This is why our annotated attributes span multiple granularity levels, and why our pipeline supports not just DROP (remove entirely) but also ABSTRACT (rewrite at a coarser level). This enables models to learn transformations like: "Patient diagnosed with Stage II breast cancer on 02/14/2024" → "Patient has an ongoing medical condition," or "Lives at 742 Evergreen Terrace, Springfield" → "Lives in the Midwest." These granularity-aware transformations are essential for real-world privacy, where the goal is to share enough information for a task while revealing nothing more. Until now, no large-scale dataset has provided training signals for this capability.
+          </p>
+
+          <h3 class="title is-5">Building Privacy-forward Systems</h3>
+          <p>
+            By training on Privasis-Sanitization, <b>we show that even compact models can learn these nuanced privacy transformations at scale</b>. A fine-tuned 4B parameter model outperforms frontier systems like o3 and GPT-5 on our sanitization benchmarks—enabling users to deploy lightweight privacy guards locally that intercept and sanitize sensitive information before it reaches any AI agent, whether remote or on-device. Privasis enables a different approach where local sanitization models strip away unnecessary detail while preserving task utility. Beyond immediate protection, Privasis provides the foundation for building privacy-forward agents from the ground up—systems that understand contextual boundaries, respect information flow, and make appropriate disclosure decisions by design rather than as an afterthought. High-performance privacy protection can—and should—be handled within local, secure environments where users retain full control.
           </p>
         </div>
       </div>
@@ -1403,7 +1422,7 @@ Privasis is a starting point. As AI agents gain deeper access to our personal da
     <pre><code>@article{kim2026privasis,
     title={Privasis: Synthesizing the Largest 'Public' Private Dataset from Scratch},
     author={Kim, Hyunwoo and Mireshghallah, Niloofar and Duan, Michael and Xin, Rui and Li, Shuyue Stella and Jung, Jaehun and Acuna, David and Pang, Qi and Xiao, Hanshen and Suh, G. Edward and Oh, Sewoong and Tsvetkov, Yulia and Koh, Pang Wei and Choi, Yejin},
-    booktitle ={arXiv preprint arXiv:2601.12345},
+    booktitle ={arXiv preprint arXiv:2602.03183},
     year=2026
 }</code></pre>
   </div>
@@ -1414,7 +1433,7 @@ Privasis is a starting point. As AI agents gain deeper access to our personal da
   <div class="container">
     <div class="content has-text-centered">
       <a class="icon-link"
-         href="./static/data/privasis.pdf">
+         href="https://arxiv.org/pdf/2602.03183">
         <i class="fas fa-file-pdf"></i>
       </a>
       <a class="icon-link" href="https://github.com/skywalker023/privasis" class="external-link" disabled>
